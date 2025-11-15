@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Lumerra - Professional logistics and shipping company providing worldwide freight solutions" />
+            <link href="storage/site/Lvj6S1ldyoXJkVXt131hxNH2sqiKAwyAGQ6ly3GK.png" rel="apple-touch-icon">
+        <link href="storage/site/Lvj6S1ldyoXJkVXt131hxNH2sqiKAwyAGQ6ly3GK.png" rel="icon" type="image/x-icon">
+        <link href="storage/site/Lvj6S1ldyoXJkVXt131hxNH2sqiKAwyAGQ6ly3GK.png" rel="shortcut icon" type="image/x-icon">
+    
+    <title>Track Your Shipment - Lumerra</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net/">
+    <link href="https://fonts.bunny.net/css?family=inter:300,400,500,600,700|poppins:400,500,600,700&amp;display=swap" rel="stylesheet" />
+
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+    sans: ['Inter', 'system-ui', 'sans-serif'],
+    display: ['Poppins', 'Inter', 'sans-serif'],
+},
+                    colors: {
+                        horizon: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e', // Dark green for navigation
+                            800: '#115e59',
+                            900: '#134e4a',
+                            950: '#220c13',
+                        },
+                        gold: {
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                        },
+                        secondary: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#020617',
+                        },
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'slide-down': 'slideDown 0.3s ease-out',
+                        'scale': 'scale 0.3s ease-in-out',
+                        'bounce-slow': 'bounce 3s infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(10px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        slideDown: {
+                            '0%': { transform: 'translateY(-10px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        scale: {
+                            '0%': { transform: 'scale(0.95)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        },
+                    },
+                    boxShadow: {
+                        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+                    },
+                },
+            },
+        }
+    </script>
+    
+    <!-- jQuery -->
+    <script src="code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+    </style>
+    
+    <!-- In your navigation, add this next to other nav items -->
+<div class="hidden md:flex items-center ml-4">
+    <!-- Paste the translation component here -->
+</div>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col bg-white text-secondary-900">
+    <!-- Top Bar -->
+    <div class="bg-horizon-800 text-white py-2 hidden md:block">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center text-sm">
+                <div class="flex items-center space-x-6">
+                    <a href="mailto:#" class="flex items-center hover:text-gold-400 transition-colors duration-200">
+                        <i class="fas fa-envelope mr-2"></i>
+                        support@Lumerra
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-gold-400">Follow us:</span>
+                    <a href="#" class="hover:text-gold-400 transition-colors duration-200">
+                        <i class="fab fa-facebook-f"></i>
+                        <span class="ml-1 hidden lg:inline">Facebook</span>
+                    </a>
+                    <a href="#" class="hover:text-gold-400 transition-colors duration-200">
+                        <i class="fab fa-twitter"></i>
+                        <span class="ml-1 hidden lg:inline">Twitter</span>
+                    </a>
+                    <a href="#" class="hover:text-gold-400 transition-colors duration-200">
+                        <i class="fab fa-linkedin-in"></i>
+                        <span class="ml-1 hidden lg:inline">LinkedIn</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 transition-all duration-300 bg-horizon-700 shadow-lg">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="flex items-center">
+                                                    <img src="storage/site/MuRrRuUVBKU2zEGLaFbiqROCDhP0ZJ7qgCSbdKck.png" alt="Lumerra" class="h-10 md:h-12 filter">
+                                            </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-white hover:text-gold-400 text-base font-medium tracking-wide transition-colors duration-200">
+                        Home
+                    </a>
+                    <a href="logistics.html" class="text-white hover:text-gold-400 text-base font-medium tracking-wide transition-colors duration-200">
+                        Logistics
+                    </a>
+                    <a href="services.html" class="text-white hover:text-gold-400 text-base font-medium tracking-wide transition-colors duration-200">
+                        Services
+                    </a>
+                    <a href="about.html" class="text-white hover:text-gold-400 text-base font-medium tracking-wide transition-colors duration-200">
+                        About
+                    </a>
+                    <a href="contact.html" class="text-white hover:text-gold-400 text-base font-medium tracking-wide transition-colors duration-200">
+                        Contact
+                    </a>
+                </nav>
+                
+                <!-- Get Quote Button (Desktop) -->
+                <div class="hidden md:block">
+                    <a href="track.html" class="inline-flex items-center px-6 py-2 border border-transparent text-base font-medium rounded-md text-horizon-700 bg-gold-500 hover:bg-gold-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500 transition-colors duration-200">
+                        TRACK
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-white hover:text-gold-400 focus:outline-none">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden bg-horizon-700 shadow-lg hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-horizon-600 transition-colors duration-200">
+                    Home
+                </a>
+                <a href="logistics.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-horizon-600 transition-colors duration-200">
+                    Logistics
+                </a>
+                <a href="services.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-horizon-600 transition-colors duration-200">
+                    Services
+                </a>
+                <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-horizon-600 transition-colors duration-200">
+                    About
+                </a>
+                <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-horizon-600 transition-colors duration-200">
+                    Contact
+                </a>
+                <div class="pt-4">
+                    <a href="track.html" class="block w-full text-center px-3 py-2 rounded-md text-base font-medium text-horizon-700 bg-gold-500 hover:bg-gold-600 transition-colors duration-200">
+                        TRACK
+                    </a>
+                    
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </header>
+
+    <!-- Page Content -->
+    <main class="flex-grow">
+        <div class="animate-fade-in">
+            <!-- Hero Section -->
+<section class="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=2070&amp;q=80')"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-horizon-900/85 to-horizon-700/75"></div>
+    
+    <div class="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="max-w-6xl mx-auto text-center text-white">
+            <!-- Main Content -->
+            <div class="space-y-12">
+                <!-- Header Content -->
+                <div class="space-y-8">
+                    <p class="text-gold-400 font-semibold text-lg tracking-wide animate-fade-in">
+                        Real-Time Package Tracking
+                    </p>
+                    <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight animate-slide-up">
+                        Track Your <span class="text-gold-400">Shipment</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl md:text-2xl leading-relaxed max-w-4xl mx-auto animate-slide-up text-white/90">
+                        Get instant updates on your package location with our advanced tracking system. Monitor every step of your delivery journey in real-time.
+                    </p>
+                </div>
+                
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 animate-slide-up">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 hover:bg-white/20 transition-all duration-300 group border border-white/10">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gold-500 rounded-lg sm:rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-shipping-fast text-white text-lg sm:text-xl"></i>
+                        </div>
+                        <h3 class="font-bold text-base sm:text-lg mb-1 sm:mb-2">98.5%</h3>
+                        <p class="text-xs sm:text-sm text-gray-300">On-Time Delivery</p>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 hover:bg-white/20 transition-all duration-300 group border border-white/10">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gold-500 rounded-lg sm:rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-globe text-white text-lg sm:text-xl"></i>
+                        </div>
+                        <h3 class="font-bold text-base sm:text-lg mb-1 sm:mb-2">120+</h3>
+                        <p class="text-xs sm:text-sm text-gray-300">Countries</p>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 hover:bg-white/20 transition-all duration-300 group border border-white/10">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gold-500 rounded-lg sm:rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-clock text-white text-lg sm:text-xl"></i>
+                        </div>
+                        <h3 class="font-bold text-base sm:text-lg mb-1 sm:mb-2">24/7</h3>
+                        <p class="text-xs sm:text-sm text-gray-300">Live Tracking</p>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 hover:bg-white/20 transition-all duration-300 group border border-white/10">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gold-500 rounded-lg sm:rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-shield-alt text-white text-lg sm:text-xl"></i>
+                        </div>
+                        <h3 class="font-bold text-base sm:text-lg mb-1 sm:mb-2">100%</h3>
+                        <p class="text-xs sm:text-sm text-gray-300">Secure</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div class="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+            <div class="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Tracking Form Section -->
+<section class="py-20 bg-gradient-to-br from-white to-gray-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <p class="text-gold-600 font-semibold text-sm uppercase tracking-wide mb-4">Enter Tracking Number</p>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-horizon-800 mb-6">
+                    Find Your <span class="text-gold-600">Package</span>
+                </h2>
+                <p class="text-xl text-secondary-600 max-w-3xl mx-auto">
+                    Enter your tracking number below to get detailed information about your shipment's journey and estimated delivery time.
+                </p>
+            </div>
+
+            <!-- Enhanced Tracking Form -->
+            <div class="relative">
+                <div class="bg-gradient-to-r from-horizon-700 via-horizon-600 to-horizon-800 rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden">
+                    <!-- Decorative Elements -->
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full transform translate-x-20 -translate-y-20"></div>
+                    <div class="absolute bottom-0 left-0 w-32 h-32 bg-gold-400/10 rounded-full transform -translate-x-16 translate-y-16"></div>
+                    <div class="absolute top-1/2 right-10 opacity-10">
+                        <i class="fas fa-truck text-8xl transform -rotate-12 text-white"></i>
+                    </div>
+                    
+                    <div class="relative z-10 text-white">
+                        <!-- Form Header -->
+                        <div class="text-center mb-10">
+                            <div class="w-16 h-16 bg-gold-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                                <i class="fas fa-search text-white text-2xl"></i>
+                            </div>
+                            <h3 class="font-display text-3xl md:text-4xl font-bold mb-4">
+                                Track Your Package
+                            </h3>
+                            <p class="text-lg text-gray-200 max-w-2xl mx-auto">
+                                Enter your tracking number to get real-time updates on your shipment's location, status, and estimated delivery time.
+                            </p>
+                        </div>
+                        
+                        <!-- Alert Messages -->
+                                                
+                                                
+                       <!-- Tracking Form (with validation) -->
+<form id="track-form" action="result.html" method="GET" class="space-y-8">
+    <input type="hidden" autocomplete="off">
+    <div class="space-y-6">
+        <div>
+            <label for="tracking_number" class="block text-lg font-semibold text-gray-200 mb-4">
+                <i class="fas fa-barcode mr-2 text-gold-400"></i>
+                Tracking Number
+            </label>
+            <div class="relative group">
+                <div class="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
+                    <i class="fas fa-search text-gray-400 text-xl"></i>
+                </div>
+                <input type="text"
+                       id="tracking_number"
+                       name="tracking_number"
+                       placeholder="Enter tracking number (e.g., Lumerra34536)"
+                       class="w-full pl-16 pr-6 py-5 bg-white/95 backdrop-blur-sm text-gray-800 text-lg rounded-2xl border-2 border-white/20 focus:border-gold-400 focus:ring-4 focus:ring-gold-400/20 outline-none transition-all duration-300 hover:bg-white shadow-xl placeholder-gray-500"
+                       required
+                       autocomplete="off"
+                >
+            </div>
+            <!-- Inline error message goes here -->
+            <div id="track-error" class="mt-2 text-red-600 text-base font-semibold px-3 py-1 rounded hidden bg-red-50 border border-red-200">
+                Invalid Tracking Number. Try Again.
+            </div>
+            <div class="mt-4 flex items-center text-sm text-gray-300 bg-white/10 rounded-xl p-4">
+                <i class="fas fa-info-circle mr-3 text-gold-400"></i>
+                <span>You can enter multiple tracking numbers separated by commas (up to 10 packages)</span>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center">
+            <button type="submit"
+                    class="inline-flex items-center justify-center px-12 py-5 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-white font-bold text-lg rounded-2xl shadow-2xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gold-500/50">
+                <i class="fas fa-search mr-3"></i>
+                Track My Package
+            </button>
+        </div>
+    </div>
+</form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sample Tracking Results Section -->
+
+<!-- Features Section -->
+<section class="py-20 bg-gradient-to-br from-horizon-50 to-gold-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <p class="text-gold-600 font-semibold text-sm uppercase tracking-wide mb-4">Advanced Features</p>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-horizon-800 mb-6">
+                    Smart Tracking <span class="text-gold-600">Technology</span>
+                </h2>
+                <p class="text-xl text-secondary-600 max-w-3xl mx-auto">
+                    Experience next-generation package tracking with real-time updates and intelligent notifications.
+                </p>
+            </div>
+            
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Real-Time Tracking -->
+                <div class="group bg-white rounded-2xl shadow-soft p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-satellite-dish text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-horizon-800 mb-4">Real-Time GPS Tracking</h3>
+                    <p class="text-secondary-600 leading-relaxed">
+                        Follow your package's exact location with live GPS tracking and minute-by-minute updates.
+                    </p>
+                </div>
+                
+                <!-- Smart Notifications -->
+                <div class="group bg-white rounded-2xl shadow-soft p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-bell text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-horizon-800 mb-4">Smart Notifications</h3>
+                    <p class="text-secondary-600 leading-relaxed">
+                        Receive intelligent alerts via SMS, email, or push notifications about your delivery status.
+                    </p>
+                </div>
+
+                <!-- Delivery Management -->
+                <div class="group bg-white rounded-2xl shadow-soft p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+                    <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-calendar-check text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-horizon-800 mb-4">Flexible Delivery Options</h3>
+                    <p class="text-secondary-600 leading-relaxed">
+                        Reschedule deliveries, redirect packages, or choose safe delivery locations with ease.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 bg-gradient-to-r from-horizon-700 via-horizon-600 to-horizon-800 text-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="max-w-4xl mx-auto space-y-8">
+            <div>
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">
+                    Ready to Ship with <span class="text-gold-400">Lumerra</span>?
+                </h2>
+                <p class="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
+                    Experience the most advanced tracking system in the industry. Get started today with our comprehensive logistics solutions.
+                </p>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <a href="contact.html" 
+                   class="inline-flex items-center justify-center px-10 py-4 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 shadow-2xl">
+                    <i class="fas fa-shipping-fast mr-3"></i>
+                    Ship Now
+                </a>
+                <a href="services.html" 
+                   class="inline-flex items-center justify-center px-10 py-4 border-2 border-white text-white hover:bg-white hover:text-horizon-800 font-semibold rounded-xl transition-all duration-200">
+                    <i class="fas fa-info-circle mr-3"></i>
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+$(document).ready(function() {
+    // Enhanced form interactions
+    $('#tracking_number').on('input', function() {
+        let value = $(this).val().toUpperCase();
+        // Remove any non-alphanumeric characters except commas and spaces
+        value = value.replace(/[^A-Z0-9,\s]/g, '');
+        $(this).val(value);
+    });
+    
+    // Form submission handling
+    $('form').on('submit', function() {
+        const button = $(this).find('button[type="submit"]');
+        button.prop('disabled', true);
+        button.html('<i class="fas fa-spinner fa-spin mr-3"></i>Tracking...');
+        
+        // Re-enable after 5 seconds as fallback
+        setTimeout(() => {
+            button.prop('disabled', false);
+            button.html('<i class="fas fa-search mr-3"></i>Track My Package');
+        }, 5000);
+    });
+});
+</script>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-horizon-800 text-white mt-16">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div class="col-span-1 md:col-span-2 lg:col-span-1">
+                    <a href="index.html" class="inline-block mb-6">
+                                                    <img src="storage/site/MuRrRuUVBKU2zEGLaFbiqROCDhP0ZJ7qgCSbdKck.png" alt="Lumerra" class="h-10 w-auto filter ">
+                                            </a>
+                    <div class="space-y-2 text-gray-300">
+                        <p>
+                            <a href="#" class="hover:text-gold-400 transition-colors duration-200">
+                                support@Lumerra
+                            </a>
+                        </p>
+                        <p>885 E. Fawn St.<br>Indio, CA 92201</p>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gold-400 mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="logistics.html" class="text-gray-300 hover:text-gold-400 transition-colors duration-200">
+                                Logistics
+                            </a>
+                        </li>
+                        <li>
+                            <a href="services.html" class="text-gray-300 hover:text-gold-400 transition-colors duration-200">
+                                Services
+                            </a>
+                        </li>
+                        <li>
+                            <a href="about.html" class="text-gray-300 hover:text-gold-400 transition-colors duration-200">
+                                About
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contact.html" class="text-gray-300 hover:text-gold-400 transition-colors duration-200">
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gold-400 mb-6">Services</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="#" class="text-gray-300 hover:text-gold-400 transition-colors duration-200">
+                                Air Freight
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-300 hover:text-gold-400 transition-colors duration-200">
+                                Ocean Freight
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-300 hover:text-gold-400 transition-colors duration-200">
+                                Road Transport
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-300 hover:text-gold-400 transition-colors duration-200">
+                                Warehousing
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Newsletter -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gold-400 mb-6">Subscribe Newsletter</h3>
+                    <form action="#" class="space-y-4">
+                        <input type="email" placeholder="Enter your email address..." class="w-full px-4 py-2 bg-horizon-700 border border-horizon-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-gold-500">
+                        <button type="submit" class="w-full px-4 py-2 bg-gold-500 hover:bg-gold-600 text-horizon-800 font-medium rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="mt-12 pt-8 border-t border-horizon-700 text-center">
+                <p class="text-gray-400">&copy; 2025 Lumerra. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button 
+        id="back-to-top" 
+        class="fixed bottom-6 right-6 p-3 rounded-full bg-gold-500 text-horizon-700 shadow-lg transform transition-transform duration-300 hover:scale-110 focus:outline-none hidden"
+    >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </button>
+
+    <script>
+        $(document).ready(function() {
+            // Mobile menu toggle
+            $('#mobile-menu-button').click(function() {
+                $('#mobile-menu').slideToggle();
+            });
+            
+            // Back to top button
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 300) {
+                    $('#back-to-top').fadeIn();
+                } else {
+                    $('#back-to-top').fadeOut();
+                }
+            });
+            
+            $('#back-to-top').click(function() {
+                $('html, body').animate({scrollTop: 0}, 800);
+                return false;
+            });
+        });
+    </script>
+    
+   
+
+<!-- Google Translate Widget -->
+<div id="google_translate_element"></div>
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL, // HORIZONTAL shows actual dropdown
+      autoDisplay: false
+    }, 'google_translate_element');
+  }
+</script>
+
+<script type="text/javascript"
+  src="translate.google.com/translate_a/elementa0d8.js?cb=googleTranslateElementInit">
+</script>
+
+<style>
+  /* Container style */
+  #google_translate_element {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9999;
+    background: #ffffff;
+    border-radius: 6px;
+    padding: 6px 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    max-width: 160px;
+    font-size: 14px;
+  }
+
+  /* Style the select dropdown */
+  #google_translate_element select {
+    padding: 4px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Responsive adjustment */
+  @media (max-width: 600px) {
+    #google_translate_element {
+      bottom: 10px;
+      left: 10px;
+      width: 140px;
+      padding: 4px 6px;
+    }
+
+    #google_translate_element select {
+      font-size: 13px;
+    }
+  }
+</style>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const defaultTracking = "Lu45D6";
+    const form = document.getElementById('track-form');
+    const input = document.getElementById('tracking_number');
+    const errorDiv = document.getElementById('track-error');
+
+    form.addEventListener('submit', function(e) {
+        // Trim value and compare case-insensitive
+        const val = input.value.trim();
+        if(val.length === 0 || val.toLowerCase() !== defaultTracking.toLowerCase()) {
+            e.preventDefault();
+            errorDiv.classList.remove('hidden');
+            input.classList.add('border-red-500', 'bg-red-50');
+            input.classList.remove('border-gold-400');
+            input.focus();
+        } else {
+            // Ok! proceed (can optionally add hidden input/GET param if needed)
+            errorDiv.classList.add('hidden');
+            input.classList.remove('border-red-500', 'bg-red-50');
+        }
+    });
+
+    // Optional: clear error while typing
+    input.addEventListener('input', function() {
+        errorDiv.classList.add('hidden');
+        input.classList.remove('border-red-500', 'bg-red-50');
+    });
+});
+</script>
+
+ <script>
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            showWarning('Right-click is disabled on this page.');
+        });
+        
+        // Disable specific keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Disable Ctrl+U (View Source)
+            if (e.ctrlKey && e.key === 'u') {
+                e.preventDefault();
+                showWarning('View source functionality is disabled.');
+                return false;
+            }
+            
+            // Disable F12 (Developer Tools)
+            if (e.key === 'F12') {
+                e.preventDefault();
+                showWarning('Developer tools are disabled on this page.');
+                return false;
+            }
+            
+            // Disable Ctrl+Shift+I (Developer Tools)
+            if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+                e.preventDefault();
+                showWarning('Developer tools are disabled on this page.');
+                return false;
+            }
+            
+            // Disable Ctrl+Shift+C (Inspect Element)
+            if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+                e.preventDefault();
+                showWarning('Inspect element functionality is disabled.');
+                return false;
+            }
+            
+            // Disable Ctrl+Shift+J (JavaScript Console)
+            if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+                e.preventDefault();
+                showWarning('JavaScript console is disabled on this page.');
+                return false;
+            }
+        });
+        
+        // Attempt to detect developer tools opening
+        let devToolsOpen = false;
+        
+        setInterval(function() {
+            const widthThreshold = window.outerWidth - window.innerWidth > 160;
+            const heightThreshold = window.outerHeight - window.innerHeight > 160;
+            
+            if (!devToolsOpen && (widthThreshold || heightThreshold)) {
+                devToolsOpen = true;
+                showWarning('Developer tools detection triggered. Please close developer tools to continue.');
+            }
+        }, 1000);
+        
+        // Show warning message
+        function showWarning(message) {
+            // Remove existing warning if present
+            const existingWarning = document.getElementById('protection-warning');
+            if (existingWarning) {
+                existingWarning.remove();
+            }
+            
+            // Create warning element
+            const warning = document.createElement('div');
+            warning.id = 'protection-warning';
+            warning.style.position = 'fixed';
+            warning.style.top = '20px';
+            warning.style.left = '50%';
+            warning.style.transform = 'translateX(-50%)';
+            warning.style.backgroundColor = '#ff4757';
+            warning.style.color = 'white';
+            warning.style.padding = '15px 20px';
+            warning.style.borderRadius = '5px';
+            warning.style.zIndex = '10000';
+            warning.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
+            warning.style.maxWidth = '80%';
+            warning.style.textAlign = 'center';
+            warning.style.fontWeight = 'bold';
+            warning.textContent = message;
+            
+            document.body.appendChild(warning);
+            
+            // Remove warning after 3 seconds
+            setTimeout(function() {
+                if (document.body.contains(warning)) {
+                    warning.style.opacity = '0';
+                    warning.style.transition = 'opacity 0.5s ease';
+                    setTimeout(() => warning.remove(), 500);
+                }
+            }, 3000);
+        }
+        
+        // Additional protection: disable text selection
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+        });
+        
+        // Disable dragging of images
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+            }
+        });
+    </script>
+
+
+</body>
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

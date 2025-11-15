@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Live Route Tracking</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+ <meta name="description" content="Lumerra - Professional logistics and shipping company providing worldwide freight solutions" />
+            <link href="storage/site/Lvj6S1ldyoXJkVXt131hxNH2sqiKAwyAGQ6ly3GK.png" rel="apple-touch-icon">
+        <link href="storage/site/Lvj6S1ldyoXJkVXt131hxNH2sqiKAwyAGQ6ly3GK.png" rel="icon" type="image/x-icon">
+        <link href="storage/site/Lvj6S1ldyoXJkVXt131hxNH2sqiKAwyAGQ6ly3GK.png" rel="shortcut icon" type="image/x-icon">
+    
+    <title>Logistics Services - Lumerra</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net/">
+    <link href="https://fonts.bunny.net/css?family=inter:300,400,500,600,700|poppins:400,500,600,700&amp;display=swap" rel="stylesheet" />
+
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+    sans: ['Inter', 'system-ui', 'sans-serif'],
+    display: ['Poppins', 'Inter', 'sans-serif'],
+},
+                    colors: {
+                        horizon: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e', // Dark green for navigation
+                            800: '#115e59',
+                            900: '#134e4a',
+                            950: '#220c13',
+                        },
+                        gold: {
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                        },
+                        secondary: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#020617',
+                        },
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'slide-down': 'slideDown 0.3s ease-out',
+                        'scale': 'scale 0.3s ease-in-out',
+                        'bounce-slow': 'bounce 3s infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(10px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        slideDown: {
+                            '0%': { transform: 'translateY(-10px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        scale: {
+                            '0%': { transform: 'scale(0.95)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        },
+                    },
+                    boxShadow: {
+                        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+                    },
+                },
+            },
+        }
+    </script>
+    
+    <!-- jQuery -->
+    <script src="code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+    </style>
+    
+   
+
+
+
+
+
+
+
+  <style>
+  
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f5f9fa;
+  margin: 0;
+  padding: 0;
+}
+* { box-sizing: border-box; }
+
+/* Container & Card */
+.container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 20px auto;
+  max-width: 1280px;
+  padding: 0 16px;
+}
+
+.left-col {
+  flex: 2 1 500px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.card.live-card {
+  position: relative;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(30,136,100,0.08), 0 1.5px 6px rgba(0,0,0,0.07);
+  padding: 24px 20px;
+  margin-bottom: 24px;
+  transition: all 0.3s ease;
+}
+
+.live-header {
+  color: #176F63;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.3em;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.live-icon { width:26px; height:26px; }
+
+.live-dot {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: #23ca59;
+  border-radius: 50%;
+  animation: livepulse 1.1s infinite cubic-bezier(.44,1.8,.56,.97);
+  margin-left: auto;
+}
+
+@keyframes livepulse {
+  0% { box-shadow: 0 0 0 0 #23ca5975; }
+  100% { box-shadow: 0 0 0 16px #23ca5900; }
+}
+
+.subtitle {
+  color: #285e60;
+  font-size: 1em;
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+
+/* Map */
+#map {
+  width: 100%;
+  height: 380px;
+  border-radius: 12px;
+  border: 1.3px solid #eef3fa;
+}
+
+/* Leaflet Popup Style - Added */
+.leaflet-popup, .leaflet-popup-content-wrapper {
+  background: #fff;
+  color: #113250;
+  border-radius: 10px;
+  box-shadow: 0 8px 40px rgba(28,60,78,0.185);
+  font-size: 1em;
+  font-family: inherit;
+  border: none;
+}
+.leaflet-popup-content-wrapper { padding: 0; }
+.leaflet-popup-content {
+  margin: 14px 18px 13px 18px;
+  line-height: 1.62;
+  font-size: 1.07em;
+  color: #17517a;
+}
+.leaflet-popup-tip {
+  background: #fff;
+  box-shadow: none;
+}
+.leaflet-popup-close-button {
+  color: #285e60;
+  font-size: 1.2em;
+  top: 4px;
+  right: 7px;
+}
+.leaflet-container a.leaflet-popup-close-button {
+  color: #285e60;
+}
+
+/* Progress Box */
+.progress-box {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 1em;
+  font-weight: 500;
+  color: #444;
+  box-shadow: 0 2px 8px rgba(23,98,129,0.06);
+  border: 1px solid #eeeff2;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.progress-box .percent {
+  color: #f89e3e;
+  font-weight: bold;
+}
+
+/* Responsive Layout Tweaks */
+@media (max-width: 1100px) {
+  .container {
+    flex-direction: column;
+    max-width: 99vw;
+    padding: 0;
+  }
+  .left-col, .right-col {
+    width: 100%;
+    min-width: 0;
+    max-width: 100vw;
+  }
+  .right-col { margin-top: 12px; }
+}
+@media (max-width: 1024px) {
+  #map { height: 300px; }
+  .progress-box { top: 12px; right: 14px; font-size: 0.95em; }
+}
+@media (max-width: 800px) {
+  #map { height: 220px;}
+  .live-header { font-size: 1em;}
+}
+@media (max-width: 768px) {
+  #map { height: 250px; }
+  .progress-box { position: static; margin-top: 12px; font-size: 0.9em; width: fit-content; }
+}
+@media (max-width: 600px) {
+  .card.live-card { padding: 10px 4px; }
+  #map { height: 180px; }
+  .container {margin:12px auto;}
+}
+@media (max-width: 480px) {
+  #map { height: 120px; }
+  .card.live-card { padding: 8px 2px; }
+  .live-header { font-size: .9em; }
+  .progress-box { width: 100%; text-align: center; margin-top: 8px; padding: 7px 7px; }
+}
+
+/* Forms and Contact */
+.card-form {
+  margin-bottom: 10px;
+}
+.input-label {
+  font-weight: 600;
+  color: #216374;
+  font-size: 1.11em;
+  margin-bottom: 9px;
+  display: block;
+}
+.track-input {
+  width: 100%;
+  padding: 13px 11px;
+  border-radius: 8px;
+  border: 1.1px solid #d3e0e5;
+  font-size: 1em;
+  font-family: inherit;
+  background: #f6fafc;
+  outline: none;
+  margin-bottom: 13px;
+  box-sizing: border-box;
+}
+.btn-track {
+  background: #fd6600;
+  border: none;
+  outline: none;
+  color: #fff;
+  padding: 13px 0;
+  border-radius: 9px;
+  font-weight: 700;
+  font-size: 1.11em;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.14s;
+  margin-top: -1px;
+}
+.btn-track:hover {
+  background: #e45d00;
+}
+.contact-card {
+  background: #eafff3;
+  border-radius: 10px;
+  box-shadow: 0 0.5px 4px rgba(23,98,129,0.04);
+  padding: 17px 15px 10px 15px;
+  margin-bottom: 12px;
+}
+.contact-card-title {
+  color: #166b5c;
+  font-weight: 700;
+  font-size: 1.08em;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 8px;
+}
+.contact-block {
+  background: #f9fffa;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin-bottom: 11px;
+  border: 1.2px solid #dafad8;
+}
+.contact-block span {
+  display: block;
+  margin-bottom: 2px;
+  color: #315e47;
+}
+.contact-name {
+  font-weight: bold;
+  color: #28869c;
+}
+
+/* Timeline Styles */
+.timeline-section {
+  margin-top: 16px;
+  margin-bottom: 30px;
+  width: 100%;
+  display: flex;
+  gap: 0;
+}
+.timeline-list-wrapper {
+  flex: 1 1 0;
+  position: relative;
+  width: 100%;
+  display: flex;
+}
+.timeline-bar2 {
+  position: absolute;
+  left: 26px;
+  top: 0;
+  bottom: 0;
+  width: 24px;
+  z-index: 2;
+  pointer-events: none;
+}
+.timeline-bar2 .tl-line {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 3.5px;
+  height: 100%;
+  background: #1dc17f linear-gradient(#00d284 55%, #d1e3e9 100%);
+  border-radius: 2px;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+.timeline-point2 {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 29px; height: 29px;
+  border-radius: 50%;
+  background: #fff;
+  border: 4px solid #ffae2c;
+  box-shadow: 0 2px 8px #ffecbd25;
+}
+.timeline-point2.pulse {
+  box-shadow: 0 0 0 0 #ffae2c;
+  animation: timelinePulse 1.2s infinite cubic-bezier(.44,1.8,.56,.97);
+}
+.timeline-point2 img { width: 18px; height: 18px; filter: drop-shadow(0 1px 2px #fffcc5e0);}
+.timeline-dot2 {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #dee4f7;
+  border: 2px solid #bcd2f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@keyframes timelinePulse {
+  0% { box-shadow: 0 0 0 0 #ffae2c99; }
+  100% { box-shadow: 0 0 0 16px #ffae2c00; }
+}
+.timeline-listblock {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.timeline-event-card, .timeline-event-card-todo {
+  background: #fff;
+  border-radius: 11px;
+  box-shadow: 0 1.5px 10px #99c6ef0d;
+  padding: 21px 17px 15px 64px;
+  margin-bottom: 26px;
+  min-height: 64px;
+  position: relative;
+  border-left: 4px solid transparent;
+  width: 100%;
+  max-width: 100%;
+  /* Enable flexible stacking of date and content */
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-event-card.special {
+  background: #e7fcf2;
+  border-left: 4px solid #21cc89;
+  box-shadow: 0 2.5px 20px #52fcf82d;
+  font-weight: 600;
+}
+.timeline-event-card.current {
+  border-left: 4px solid #ffae2c;
+  background: #fffbe9;
+  box-shadow: 0 4px 24px #fff6cc33;
+}
+.timeline-event-card .timeline-title,
+.timeline-event-card-todo .timeline-title {
+  font-size: 1.13em;
+  font-weight: 670;
+  color: #219976;
+  margin-bottom: 4px;
+}
+
+/* Date: Put in a flex row at the top and ensure it wraps under on mobile */
+.timeline-event-card .timeline-row,
+.timeline-event-card-todo .timeline-row {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.timeline-row .timeline-title {
+  flex-grow: 1;
+  min-width: 0;
+}
+.timeline-row .timeline-date {
+  flex-shrink: 0;
+  color: #8d98b7;
+  font-size: 0.96em;
+  font-weight: 520;
+  letter-spacing: 0.8px;
+  position: static;
+  margin-left: 1em;
+  margin-top: 0.2em;
+  white-space: nowrap;
+  background: transparent;
+}
+
+.timeline-event-card.current .timeline-title {
+  color: #ff930f;
+  font-size: 1.18em;
+  font-weight: 650;
+}
+.timeline-date,
+.timeline-date.current {
+  color: #8d98b7;
+  font-size: 0.96em;
+  position: static;
+  margin-left: 0;
+  margin-bottom: 0.3em;
+  font-weight: 520;
+  letter-spacing: 0.8px;
+  background: none;
+  order: 2;
+}
+.timeline-date.current {
+  color: #ff930f;
+  font-weight: 700;
+}
+.timeline-status {
+  padding: 3.5px 13px 3px 13px;
+  border-radius: 17px;
+  background: #e9f1ff;
+  font-size: 0.97em;
+  font-weight: 500;
+  color: #0e61c4;
+  display: inline-block;
+  margin-top: 7px;
+  margin-bottom: 3.5px;
+}
+.timeline-status.pending {
+  background: #fde5c9;
+  color: #e4800c;
+}
+.timeline-address {
+  color: #222e41;
+  line-height: 1.48;
+  margin-bottom: 2.5px;
+  margin-top: 2.5px;
+  font-weight: 520;
+  font-size: 1.01em;
+}
+.timeline-label-light {
+  color: #9caeeb;
+  font-size: 0.99em;
+}
+.timeline-event-card-todo {
+  background: #f7fafc;
+  color: #929db6;
+  box-shadow: none;
+  border: none;
+  font-weight: 600;
+  font-size: 1.08em;
+}
+
+/* ------------ RESPONSIVENESS ------------ */
+
+@media (max-width: 900px) {
+  /* Timeline indicator follow closer to left on small screens */
+  .timeline-bar2 { left: 14px; }
+  .timeline-event-card, .timeline-event-card-todo {
+    padding: 19px 8px 12px 41px;
+  }
+}
+
+@media (max-width: 600px) {
+  .timeline-event-card, .timeline-event-card-todo {
+    padding: 14px 3px 10px 31px;
+    font-size: 0.97em;
+    min-height: 38px;
+    margin-bottom: 14px;
+  }
+  .timeline-listblock { gap: 0; }
+  .timeline-date, .timeline-date.current {
+    font-size: 0.91em;
+    margin-left: 0.7em;
+  }
+  .timeline-row .timeline-title {
+    font-size: 1em;
+  }
+  .timeline-row {
+    flex-direction: column;
+    gap: 2px;
+    align-items: flex-start;
+  }
+}
+
+/* Keep title and date always on separate lines, stacked, on very small screens */
+@media (max-width: 400px) {
+  .timeline-row {
+    flex-direction: column;
+    gap: 3px;
+    align-items: flex-start;
+  }
+  .timeline-date, .timeline-date.current {
+    margin-left: 0;
+  }
+}
+/* PACKAGE INFO SECTION */
+.package-info-section {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(30,136,100,0.08), 0 1.5px 6px rgba(0,0,0,0.07);
+  margin: 32px auto;
+  max-width: 1080px;
+  padding: 0;
+  transition: all 0.3s ease;
+  width: 94%;
+}
+
+.package-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 1.9em;
+  font-weight: 700;
+  color: #177f66;
+  padding: 24px 30px;
+  border-bottom: 2px solid #f1f6fa;
+  background: #f6fffa;
+  border-radius: 16px 16px 0 0;
+}
+
+.package-header img {
+  width: 32px;
+  height: 32px;
+}
+
+.package-details-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 6vw 36px 6vw;
+  gap: 24px;
+}
+
+.package-image {
+  width: 140px;
+  height: 140px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 5px 24px rgba(202, 218, 231, 0.28);
+  border: 2px solid #eaf1ff;
+  background: #f2f8ff;
+  transition: transform 0.3s ease;
+}
+.package-image:hover {
+  transform: scale(1.05);
+}
+
+.package-facts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.package-fact-card {
+  background: #f9fbff;
+  border-radius: 14px;
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  transition: all 0.3s ease;
+  cursor: default;
+}
+.package-fact-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.package-fact-label {
+  font-size: 0.92em;
+  font-weight: 500;
+  color: #7c8fa3;
+  margin-bottom: 6px;
+}
+
+.package-fact-value {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #14426b;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.package-fact-card.shipmode .package-fact-value {
+  color: #10b78c;
+  font-weight: 700;
+}
+.package-fact-card.carrier .package-fact-value {
+  color: #227ac5;
+}
+.package-fact-card.freight .package-fact-value {
+  color: #fd6600;
+  font-weight: 700;
+  font-size: 1.15em;
+}
+
+
+/* ------------------------------ */
+/* RESPONSIVE MEDIA QUERIES */
+/* ------------------------------ */
+
+/* Tablets (≤1024px) */
+@media (max-width: 1024px) {
+  .package-header {
+    font-size: 1.6em;
+    padding: 20px 22px;
+  }
+
+  .package-image {
+    width: 130px;
+    height: 130px;
+  }
+}
+
+/* Large Phones & Small Tablets (≤768px) */
+@media (max-width: 768px) {
+  .package-header {
+    font-size: 1.45em;
+    gap: 12px;
+    padding: 18px 20px;
+  }
+
+  .package-header img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .package-image {
+    width: 120px;
+    height: 120px;
+  }
+
+  .package-facts-grid {
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .package-fact-card {
+    padding: 16px 18px;
+  }
+}
+
+/* Phones (≤480px) */
+@media (max-width: 480px) {
+  .package-info-section {
+    margin: 20px auto;
+    width: 96%;
+  }
+
+  .package-header {
+    font-size: 1.25em;
+    padding: 16px 18px;
+    gap: 10px;
+  }
+
+  .package-header img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .package-image {
+    width: 110px;
+    height: 110px;
+  }
+
+  .package-facts-grid {
+    grid-template-columns: 1fr 1fr; /* Two columns on mobile */
+    gap: 14px;
+  }
+
+  .package-fact-card {
+    padding: 14px 16px;
+  }
+
+  .package-fact-label {
+    font-size: 0.85em;
+  }
+
+  .package-fact-value {
+    font-size: 1em;
+  }
+}
+
+/* Extra Small Phones (≤360px) */
+@media (max-width: 360px) {
+  .package-facts-grid {
+    grid-template-columns: 1fr; /* Single column */
+  }
+
+  .package-header {
+    font-size: 1.15em;
+  }
+
+  .package-image {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* Support Card */
+.support-card {
+  background: #089285;
+  color: #fff;
+  border-radius: 15px;
+  padding: 23px 15px 20px 18px;
+  margin-top: 18px;
+  box-shadow: 0 2px 10px #067e7640;
+  font-size: 1.11em;
+}
+.support-card-title {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 1.13em; font-weight: 700;
+}
+.support-contact-btn {
+  background: #fff;
+  color: #118475;
+  border: none;
+  outline: none;
+  padding: 10px 25px;
+  border-radius: 7px;
+  font-size: 1.02em;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 13px;
+  transition: background 0.15s;
+  display: flex; align-items: center; gap:9px;
+}
+.support-contact-btn:hover {
+  background: #e7faf8;
+}
+  </style>
+
+   <!-- In your navigation, add this next to other nav items -->
+<div class="hidden md:flex items-center ml-4">
+    <!-- Paste the translation component here -->
+</div>
+
+</head>
+
+
+
+
+
+<body class="font-sans antialiased min-h-screen flex flex-col bg-white text-secondary-900">
+    <!-- Top Bar -->
+    <div class="bg-horizon-800 text-white py-2 hidden md:block">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center text-sm">
+                <div class="flex items-center space-x-6">
+                    <a href="#" class="flex items-center hover:text-gold-400 transition-colors duration-200">
+                        <i class="fas fa-envelope mr-2"></i>
+                        support@Lumerra
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-gold-400">Follow us:</span>
+                    <a href="#" class="hover:text-gold-400 transition-colors duration-200">
+                        <i class="fab fa-facebook-f"></i>
+                        <span class="ml-1 hidden lg:inline">Facebook</span>
+                    </a>
+                    <a href="#" class="hover:text-gold-400 transition-colors duration-200">
+                        <i class="fab fa-twitter"></i>
+                        <span class="ml-1 hidden lg:inline">Twitter</span>
+                    </a>
+                    <a href="#" class="hover:text-gold-400 transition-colors duration-200">
+                        <i class="fab fa-linkedin-in"></i>
+                        <span class="ml-1 hidden lg:inline">LinkedIn</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 transition-all duration-300 bg-horizon-700 shadow-lg">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-white hover:text-gold-400 text-base font-medium tracking-wide transition-colors duration-200">
+                        Home
+                    </a>
+                    <a href="logistics.html" class="text-white hover:text-gold-400 text-base font-medium tracking-wide transition-colors duration-200">
+                        Logistics
+                    </a>
+                    <a href="services.html" class="text-white hover:text-gold-400 text-base font-medium tracking-wide transition-colors duration-200">
+                        Services
+                    </a>
+                    <a href="about.html" class="text-white hover:text-gold-400 text-base font-medium tracking-wide transition-colors duration-200">
+                        About
+                    </a>
+                    <a href="contact.html" class="text-white hover:text-gold-400 text-base font-medium tracking-wide transition-colors duration-200">
+                        Contact
+                    </a>
+                </nav>
+                
+              
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-white hover:text-gold-400 focus:outline-none">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden bg-horizon-700 shadow-lg hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-horizon-600 transition-colors duration-200">
+                    Home
+                </a>
+                <a href="logistics.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-horizon-600 transition-colors duration-200">
+                    Logistics
+                </a>
+                <a href="services.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-horizon-600 transition-colors duration-200">
+                    Services
+                </a>
+                <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-horizon-600 transition-colors duration-200">
+                    About
+                </a>
+                <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-horizon-600 transition-colors duration-200">
+                    Contact
+                </a>
+                <div class="pt-4">
+                    <a href="track.html" class="block w-full text-center px-3 py-2 rounded-md text-base font-medium text-horizon-700 bg-gold-500 hover:bg-gold-600 transition-colors duration-200">
+                        TRACK
+                    </a>
+                    
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="container">
+    <div class="left-col">
+      <div class="card live-card">
+        <div class="live-header">
+          <img class="live-icon" src="https://cdn-icons-png.flaticon.com/512/3209/3209265.png" alt="Map marker">
+          Live Route Tracking
+          <span class="live-dot"></span>
+        </div>
+        <div class="subtitle">Real-time location tracking of your shipment</div>
+        <div id="map"></div>
+        <div class="progress-box">
+          Progress: <span class="percent">86%</span><br>
+          Stop 6 of 8
+        </div>
+      </div>
+
+      <!-- TIMELINE THAT IS NOW TOTALLY RESPONSIVE AND ALIGNED -->
+      <div class="timeline-section">
+        <div class="timeline-list-wrapper">
+          <div class="timeline-bar2" id="timeline-bar2"></div>
+          <div class="timeline-listblock" id="timeline-listblock"></div>
+        </div>
+      </div>
+      <!-- PACKAGE INFO -->
+      <div class="package-info-section">
+        <div class="package-header">
+          <img src="https://cdn-icons-png.flaticon.com/512/584/584646.png" alt="Package Icon">
+          Package Information
+        </div>
+        <div class="package-details-main">
+          <img class="package-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=300&q=80" alt="Package box" />
+          <div class="package-facts-grid">
+            <div class="package-fact-card">
+              <div class="package-fact-label">Description</div>
+              <div class="package-fact-value">consignment box</div>
+            </div>
+            <div class="package-fact-card shipmode">
+              <div class="package-fact-label">Shipping Mode</div>
+              <div class="package-fact-value"><img src="https://cdn-icons-png.flaticon.com/512/2407/2407469.png" style="width:22px;vertical-align:middle;"> Sea</div>
+            </div>
+            <div class="package-fact-card">
+              <div class="package-fact-label">Weight</div>
+              <div class="package-fact-value">78kg</div>
+            </div>
+            <div class="package-fact-card carrier">
+              <div class="package-fact-label">Carrier</div>
+              <div class="package-fact-value">Air France Cargo</div>
+            </div>
+            <div class="package-fact-card">
+              <div class="package-fact-label">Quantity</div>
+              <div class="package-fact-value">10</div>
+            </div>
+            <div class="package-fact-card freight">
+              <div class="package-fact-label">Total Freight Cost</div>
+              <div class="package-fact-value">$79200</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END PACKAGE INFO -->
+    </div>
+    <!-- RIGHT COLUMN -->
+    <div class="right-col">
+      <!-- Track Another Package Card -->
+      <div class="card">
+        <div class="input-label" style="margin-bottom: 2px;">
+          <img src="https://cdn-icons-png.flaticon.com/512/5227/5227946.png" alt="track" width="18" style="margin-right:7px; position:relative; top:2px;">
+          Track Another Package
+        </div>
+        <form class="card-form" onsubmit="event.preventDefault(); alert('Please Wait!');">
+          <input class="track-input" type="text" placeholder="Enter tracking number" />
+          <button class="btn-track" type="submit">
+            <span style="font-size:1.18em; margin-right:6px;">&#128269;</span> 
+            Track Package
+          </button>
+        </form>
+      </div>
+      <!-- Contact Info -->
+      <div class="contact-card">
+        <div class="contact-card-title">
+          <img src="https://cdn-icons-png.flaticon.com/512/777/777101.png" width="17" alt="Contact"/> Contact Information
+        </div>
+        <div class="contact-block">
+          <span style="font-weight:600; color:#279c46; font-size:1.01em;">&#128100; Receiver</span>
+          <span>Name: <span class="contact-name">Mary</span></span>
+          <span>Email: <span style="color:#4468e4;">mary@gmail.com</span></span>
+          <span>Phone: 17836364867</span>
+        </div>
+        <div class="contact-block" style="background:#f7f4fd;border-color:#e6e5f3;">
+          <span style="font-weight:600; color:#af46b4;">&#128081; Sender</span>
+          <span>Name: <span class="contact-name">Fred Miller</span></span>
+          <span>Email: <span style="color:#4468e4;">fred@mill.com</span></span>
+          <span>Phone: 01822037778</span>
+        </div>
+      </div>
+      <!-- Support Card -->
+      <div class="support-card">
+        <div class="support-card-title">
+          <img src="https://cdn-icons-png.flaticon.com/512/5974/5974636.png" width="22" style="background:#49efd4; border-radius:50%;padding:2.7px; margin-right:2px;"> 
+          Need Help?
+        </div>
+        <div style="margin: 7px 0 6px 2px;">
+          Our support team is available 24/7 to assist you with your shipment.
+        </div>
+        <button class="support-contact-btn"><img src="https://cdn-icons-png.flaticon.com/512/646/646094.png" width="19" height="18" alt="btn" /> Contact Support</button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+<!-- Footer -->
+    <footer class="bg-horizon-800 text-white mt-16">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div class="col-span-1 md:col-span-2 lg:col-span-1">
+                    <a href="index.html" class="inline-block mb-6">
+                                                    <img src="storage/site/MuRrRuUVBKU2zEGLaFbiqROCDhP0ZJ7qgCSbdKck.png" alt="Lumerra" class="h-10 w-auto filter ">
+                                            </a>
+                    <div class="space-y-2 text-gray-300">
+                        <p>
+                            <a href="#" class="hover:text-gold-400 transition-colors duration-200">
+                                support@Lumerra
+                            </a>
+                        </p>
+                        <p>885 E. Fawn St.<br>Indio, CA 92201</p>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gold-400 mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="logistics.html" class="text-gray-300 hover:text-gold-400 transition-colors duration-200">
+                                Logistics
+                            </a>
+                        </li>
+                        <li>
+                            <a href="services.html" class="text-gray-300 hover:text-gold-400 transition-colors duration-200">
+                                Services
+                            </a>
+                        </li>
+                        <li>
+                            <a href="about.html" class="text-gray-300 hover:text-gold-400 transition-colors duration-200">
+                                About
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contact.html" class="text-gray-300 hover:text-gold-400 transition-colors duration-200">
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gold-400 mb-6">Services</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="#" class="text-gray-300 hover:text-gold-400 transition-colors duration-200">
+                                Air Freight
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-300 hover:text-gold-400 transition-colors duration-200">
+                                Ocean Freight
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-300 hover:text-gold-400 transition-colors duration-200">
+                                Road Transport
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-gray-300 hover:text-gold-400 transition-colors duration-200">
+                                Warehousing
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Newsletter -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gold-400 mb-6">Subscribe Newsletter</h3>
+                    <form action="#" class="space-y-4">
+                        <input type="email" placeholder="Enter your email address..." class="w-full px-4 py-2 bg-horizon-700 border border-horizon-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-gold-500">
+                        <button type="submit" class="w-full px-4 py-2 bg-gold-500 hover:bg-gold-600 text-horizon-800 font-medium rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold-500">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="mt-12 pt-8 border-t border-horizon-700 text-center">
+                <p class="text-gray-400">&copy; 2025 Lumerra. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button 
+        id="back-to-top" 
+        class="fixed bottom-6 right-6 p-3 rounded-full bg-gold-500 text-horizon-700 shadow-lg transform transition-transform duration-300 hover:scale-110 focus:outline-none hidden"
+    >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </button>
+
+    <script>
+        $(document).ready(function() {
+            // Mobile menu toggle
+            $('#mobile-menu-button').click(function() {
+                $('#mobile-menu').slideToggle();
+            });
+            
+            // Back to top button
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 300) {
+                    $('#back-to-top').fadeIn();
+                } else {
+                    $('#back-to-top').fadeOut();
+                }
+            });
+            
+            $('#back-to-top').click(function() {
+                $('html, body').animate({scrollTop: 0}, 800);
+                return false;
+            });
+        });
+    </script>
+    
+    
+
+<!-- Google Translate Widget -->
+<div id="google_translate_element"></div>
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL, // HORIZONTAL shows actual dropdown
+      autoDisplay: false
+    }, 'google_translate_element');
+  }
+</script>
+
+<script type="text/javascript"
+  src="translate.google.com/translate_a/elementa0d8.js?cb=googleTranslateElementInit">
+</script>
+
+<style>
+  /* Container style */
+  #google_translate_element {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9999;
+    background: #ffffff;
+    border-radius: 6px;
+    padding: 6px 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    max-width: 160px;
+    font-size: 14px;
+  }
+
+  /* Style the select dropdown */
+  #google_translate_element select {
+    padding: 4px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Responsive adjustment */
+  @media (max-width: 600px) {
+    #google_translate_element {
+      bottom: 10px;
+      left: 10px;
+      width: 140px;
+      padding: 4px 6px;
+    }
+
+    #google_translate_element select {
+      font-size: 13px;
+    }
+  }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // City route coordinates (approximate)
+    const statuses = [
+      { name: "New York, NY", coords: [40.7128, -74.0060], icon: "start" },
+      { name: "Cleveland, OH", coords: [41.4993, -81.6944], icon: "" },
+      { name: "Chicago, IL", coords: [41.8781, -87.6298], icon: "" },
+      { name: "Denver, CO", coords: [39.7392, -104.9903], icon: "" },
+      { name: "Las Vegas, NV", coords: [36.1699, -115.1398], icon: "" },
+      { name: "Los Angeles, CA", coords: [34.0522, -118.2437], icon: "end" }
+    ];
+    const routeCoords = statuses.map(s => s.coords);
+
+    // Map initialization
+    const map = L.map('map').setView(routeCoords[0], 4);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Custom icons for stops
+    const iconUrls = {
+      start: "https://cdn-icons-png.flaticon.com/512/3179/3179068.png",
+      end: "https://cdn-icons-png.flaticon.com/512/484/484167.png",
+      stop: "https://cdn-icons-png.flaticon.com/512/167/167707.png",
+      truck: "https://cdn-icons-png.flaticon.com/512/684/684908.png"
+    };
+
+    // Draw the main route
+    const polyline = L.polyline(routeCoords, {color: '#2474ae', weight: 5, opacity: 0.7}).addTo(map);
+
+    // Add markers for each stop
+    statuses.forEach((s, idx) => {
+      let iconUrl = idx == 0 ? iconUrls.start : (idx === statuses.length-1 ? iconUrls.end : iconUrls.stop);
+      let marker = L.marker(s.coords, {
+        icon: L.icon({
+          iconUrl: iconUrl,
+          iconSize: [36, 36],
+          iconAnchor: [18, 36]
+        })
+      }).addTo(map);
+      marker.bindPopup(`<b>Stop ${idx+1}:</b> ${s.name}`);
+    });
+
+    // Moving truck marker
+    let truckIdx = 0;
+    let truckMarker = L.marker(routeCoords[0], {
+      icon: L.icon({
+        iconUrl: iconUrls.truck,
+        iconSize: [38, 38],
+        iconAnchor: [19, 38]
+      })
+    }).addTo(map).bindPopup("Package is here").openPopup();
+
+    function animateTruck() {
+      if (truckIdx < routeCoords.length) {
+        truckMarker.setLatLng(routeCoords[truckIdx]);
+        truckIdx++;
+        setTimeout(animateTruck, 1550);
+      }
+    }
+    animateTruck();
+    // Fit map
+    map.fitBounds(polyline.getBounds());
+
+
+    // --- Timeline responsive and perfectly ALIGNED for all events
+    // Timeline event data
+    const timelineEvents = [
+      {
+        type: "special",
+        title: "Dispatched from Origin",
+        address: "Paris, Ile-de-France, Metropolitan France, France",
+        date: "2025-06-26",
+      },
+      {
+        title: "Institut de formation du port de Marseille-Fos, Boulevard Jacques Saadé Quai de la Joliette, La Joliette, 2nd Arrondissement, Marseille, Bouches-du-Rhône, Provence-Alpes-Côte d'Azur, Metropolitan France, 13002, France",
+        label: "label created",
+        status: "In Transit",
+        date: "Jun 26, 09:38 PM"
+      },
+      {
+        title: "United Kingdom",
+        label: "we have your package",
+        status: "In Transit",
+        date: "Jun 26, 09:41 PM"
+      },
+      {
+        title: "Port of Felixstowe, Felixstowe, East Suffolk, Suffolk, England, United Kingdom",
+        status: "In Transit",
+        date: "Jun 26, 09:44 PM"
+      },
+      {
+        title: "Arrived at US Border",
+        address: "JFK International Airport, New York, United States",
+        status: "In Transit",
+        date: "Jun 26, 09:48 PM"
+      },
+      {
+        type: "current",
+        title: "Port of Vancouver, Central Avenue, Ladner, Delta, Metro Vancouver Regional District, British Columbia, V4K 1W4, Canada",
+        address: "the shipment is currently with customs authorities.",
+        status: "Pending",
+        statusClass: "pending",
+        date: "Jun 26, 09:51 PM",
+      },
+      {
+        type: "todo",
+        label: "More updates coming... <br><span style='font-weight:400; font-size:0.96em;'>Real-time tracking in progress</span>"
+      },
+      {
+        title: "Delivery at Destination",
+        address: "Boston, Suffolk County, Massachusetts, United States",
+        date: "2025-07-02",
+        isLast: true
+      }
+    ];
+
+    // Render timeline cards and aligned pointers dynamically!
+    function renderTimeline() {
+      const listblock = document.getElementById("timeline-listblock");
+      const bar = document.getElementById("timeline-bar2");
+      listblock.innerHTML = "";
+      bar.innerHTML = "";
+
+      // Calc each event's vertical position for pointer (center of card)
+      const eventPositions = [];
+      setTimeout(()=>{
+        document.querySelectorAll('.timeline-event-card, .timeline-event-card-todo').forEach((el, i) => {
+          const box = el.getBoundingClientRect();
+          eventPositions[i] = (el.offsetTop || 0) + (el.offsetHeight || 0)/2;
+        });
+        bar.style.height = listblock.offsetHeight+"px";
+
+        // Now draw all points and icon - all aligned with center of each event
+        timelineEvents.forEach((event, i) => {
+          let dot;
+          if(event.type==="current") {
+            dot = document.createElement("div");
+            dot.className = "timeline-point2 pulse";
+            dot.title = "Current";
+            dot.innerHTML = '<img src="https://cdn-icons-png.flaticon.com/512/535/535239.png" alt="current">';
+          } else {
+            dot = document.createElement("div");
+            dot.className = "timeline-dot2";
+          }
+          dot.style.top = (eventPositions[i] || (80+82*i)) + "px";
+          bar.appendChild(dot);
+        });
+        // line render
+        let line = document.createElement("div");
+        line.className = "tl-line";
+        line.style.height = (eventPositions[timelineEvents.length-1]-(eventPositions[0]||0))+"px";
+        line.style.top = (eventPositions[0]||0)+"px";
+        bar.appendChild(line);
+      }, 50);
+
+      // Render all events
+      timelineEvents.forEach((event, i) => {
+        let el;
+        if (event.type === "special") {
+          el = document.createElement("div");
+          el.className = "timeline-event-card special";
+          el.innerHTML = `<div class="timeline-title">${event.title}</div>
+                          <div class="timeline-date">${event.date||""}</div>
+                          <div class="timeline-address">${event.address||""}</div>`;
+        } else if (event.type === "todo") {
+          el = document.createElement("div");
+          el.className = "timeline-event-card-todo";
+          el.innerHTML = event.label;
+        } else if (event.type === "current") {
+          el = document.createElement("div");
+          el.className = "timeline-event-card current";
+          el.innerHTML = `<div class="timeline-title">${event.title} <span style="color:#ff930f; font-size:0.6em;">Current</span></div>
+                          <div class="timeline-address" style="font-weight:400;">${event.address||""}</div>
+                          <span class="timeline-status ${event.statusClass||""}">${event.status}</span>
+                          <span class="timeline-date current">${event.date||""}</span>`;
+        } else {
+          el = document.createElement("div");
+          el.className = "timeline-event-card" + (event.isLast?"":"");
+          el.innerHTML = `<div style="font-weight:600; margin-bottom:5px;">${event.title}</div>
+                          ${event.address?`<div>${event.address}</div>`:""}
+                          ${event.label?`<div class="timeline-label-light">${event.label}</div>`:""}
+                          ${event.status?`<span class="timeline-status">${event.status}</span>`:""}
+                          ${event.date?`<span class="timeline-date">${event.date}</span>`:""}`;
+        }
+        listblock.appendChild(el);
+      });
+    }
+    renderTimeline();
+    window.addEventListener('resize', renderTimeline);
+    // re-align on images/etc loaded
+    window.addEventListener('load', () => { setTimeout(renderTimeline,100);} );
+  </script>
+   <script>
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            showWarning('Right-click is disabled on this page.');
+        });
+        
+        // Disable specific keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Disable Ctrl+U (View Source)
+            if (e.ctrlKey && e.key === 'u') {
+                e.preventDefault();
+                showWarning('View source functionality is disabled.');
+                return false;
+            }
+            
+            // Disable F12 (Developer Tools)
+            if (e.key === 'F12') {
+                e.preventDefault();
+                showWarning('Developer tools are disabled on this page.');
+                return false;
+            }
+            
+            // Disable Ctrl+Shift+I (Developer Tools)
+            if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+                e.preventDefault();
+                showWarning('Developer tools are disabled on this page.');
+                return false;
+            }
+            
+            // Disable Ctrl+Shift+C (Inspect Element)
+            if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+                e.preventDefault();
+                showWarning('Inspect element functionality is disabled.');
+                return false;
+            }
+            
+            // Disable Ctrl+Shift+J (JavaScript Console)
+            if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+                e.preventDefault();
+                showWarning('JavaScript console is disabled on this page.');
+                return false;
+            }
+        });
+        
+        // Attempt to detect developer tools opening
+        let devToolsOpen = false;
+        
+        setInterval(function() {
+            const widthThreshold = window.outerWidth - window.innerWidth > 160;
+            const heightThreshold = window.outerHeight - window.innerHeight > 160;
+            
+            if (!devToolsOpen && (widthThreshold || heightThreshold)) {
+                devToolsOpen = true;
+                showWarning('Developer tools detection triggered. Please close developer tools to continue.');
+            }
+        }, 1000);
+        
+        // Show warning message
+        function showWarning(message) {
+            // Remove existing warning if present
+            const existingWarning = document.getElementById('protection-warning');
+            if (existingWarning) {
+                existingWarning.remove();
+            }
+            
+            // Create warning element
+            const warning = document.createElement('div');
+            warning.id = 'protection-warning';
+            warning.style.position = 'fixed';
+            warning.style.top = '20px';
+            warning.style.left = '50%';
+            warning.style.transform = 'translateX(-50%)';
+            warning.style.backgroundColor = '#ff4757';
+            warning.style.color = 'white';
+            warning.style.padding = '15px 20px';
+            warning.style.borderRadius = '5px';
+            warning.style.zIndex = '10000';
+            warning.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
+            warning.style.maxWidth = '80%';
+            warning.style.textAlign = 'center';
+            warning.style.fontWeight = 'bold';
+            warning.textContent = message;
+            
+            document.body.appendChild(warning);
+            
+            // Remove warning after 3 seconds
+            setTimeout(function() {
+                if (document.body.contains(warning)) {
+                    warning.style.opacity = '0';
+                    warning.style.transition = 'opacity 0.5s ease';
+                    setTimeout(() => warning.remove(), 500);
+                }
+            }, 3000);
+        }
+        
+        // Additional protection: disable text selection
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
+        });
+        
+        // Disable dragging of images
+        document.addEventListener('dragstart', function(e) {
+            if (e.target.tagName === 'IMG') {
+                e.preventDefault();
+            }
+        });
+    </script>
+
+</body>
+</html>
